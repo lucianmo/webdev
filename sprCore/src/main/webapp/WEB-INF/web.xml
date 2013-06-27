@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" 
+	xmlns="http://java.sun.com/xml/ns/j2ee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+  <!-- Customize the location of log file after deployment.
+       Set upp the location of the log4j properties in a context-param but 
+       you do not need to do this if it is placed on the classpath -->
+  <context-param>
+	  <param-name>log4jConfigLocation</param-name>
+	  <param-value>/WEB-INF/classes/log4j/log4j.properties</param-value>
+  </context-param>
+
+  <!-- Customize the file name and location ([servlet-name]-servlet.xml) -->
+  <context-param>
+   <param-name>contextConfigLocation</param-name>
+   <param-value>/WEB-INF/springapp-servlet.xml</param-value>
+  </context-param>
+
+  <!-- Configuring the log4j. Place the spring Log4jConfigListener as the first listener -->
+  <listener>
+     <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+  </listener>
+  
+  <!-- Customize the file name and location ([servlet-name]-servlet.xml) by adding the servlet listener ContextLoaderListener -->
+  <listener>
+     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+  <servlet>
+    <servlet-name>springapp</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+ 
+  <servlet-mapping>
+    <servlet-name>springapp</servlet-name>
+    <url-pattern>*.html</url-pattern>
+  </servlet-mapping>
+    	
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+</web-app>
