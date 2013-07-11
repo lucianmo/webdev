@@ -65,7 +65,7 @@ public class MockWorldService implements WorldService {
 	}
 
 	public void saveCountry(Country country){
-		if (country.isNew())  {
+		if (country.isNewcountry())  {
 			nextCountryId++;
 			country.setId(nextCountryId);
 			allCountris.put(nextCountryId, country);

@@ -27,7 +27,7 @@ public class Country {
     setCurrency(currency);
   }
 
-  public boolean isNew() {
+  public boolean isNewcountry() {
     return id==null;
   }
 

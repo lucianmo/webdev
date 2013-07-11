@@ -35,6 +35,14 @@ public class CountryController {
 		//The Logical View Name to inform Spring which particular view is to be displayed.
 		//By default, this is derived from the URL path of our request. For example: /countryList.html produces a view name of countryList
 	}
+
+	@RequestMapping("/countryListCreate.html")
+	@ModelAttribute("countries")
+	public Collection<Country> getCountriesCreate() {
+		return worldService.getAllCountries();
+		//The Logical View Name to inform Spring which particular view is to be displayed.
+		//By default, this is derived from the URL path of our request. For example: /countryList.html produces a view name of countryList
+	}
 	
 	/* The getCountry() method also returns a Country object into the model, but this time no @ModelAttribute annotation is specified. 
 	 * In this case, Spring uses the non-qualified class name, country, as the attribute name. 
@@ -51,4 +59,9 @@ public class CountryController {
 	 * The @RequestParam annotation takes the 'id' request parameter from the URL, and maps it to the countryId parameter
 	 * of the method. The parameter is mandatory so the URL must look like this /countryDetails.html?id=53, or an exception will be thrown.
 	 */
+	
+	@RequestMapping("/countryDetailsCreate.html")
+	public Country getCountryCreate(@RequestParam(value="id", required=true) int countryId) {
+		return worldService.getCountryById(countryId);
+	}		
 }
