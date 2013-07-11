@@ -11,8 +11,9 @@
     <!-- the application context definition for the "com.serie4it" DispatcherServlet -->
     <!-- Scans within the base package of the application for @Components to configure as beans -->
     <!-- @Controller, @Service, @Configuration, etc. -->
+    <!-- Auto-detect controllers -->
     <context:component-scan base-package="com.serie4it.begin" />
-    <context:component-scan base-package="com.serie4it.lishman" />      
+    <context:component-scan base-package="com.serie4it.lishman.controller" />      
      
     <!--  Prepend /WEB-INF/views/ and append .jsp to the logical view name  --> 
     <bean id="viewResolver"

@@ -7,8 +7,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+
 import com.serie4it.lishman.domain.Country;
 
+@Service
 public class MockWorldService implements WorldService {
 
 	static Map<Integer, Country> allCountris = new HashMap<Integer, Country>();

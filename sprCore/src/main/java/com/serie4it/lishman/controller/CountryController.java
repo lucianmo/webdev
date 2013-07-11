@@ -2,6 +2,7 @@ package com.serie4it.lishman.controller;
 
 import java.util.Collection;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +19,10 @@ import com.serie4it.lishman.domain.service.WorldService;
  */
 @Controller
 public class CountryController {
+
 	//The application will make use of the WorldService business service facade.
-	private WorldService worldService = new MockWorldService();
+	@Autowired
+	private WorldService worldService;
 	
 	/* The @RequestMapping annotation maps web requests to Java classes and methods. 
 	 * The above example maps the URL paths /countryList.html and /countryDetails.html to the getCountries() and getCountry() methods respectively.

@@ -13,28 +13,33 @@
 	  <param-value>/WEB-INF/classes/log4j/log4j.properties</param-value>
   </context-param>
 
-  <!-- Customize the file name and location ([servlet-name]-servlet.xml) -->
+  <!-- Customize the file name and location for “root” context to host “shared resources” required by Servlets / Filters -->
   <context-param>
    <param-name>contextConfigLocation</param-name>
-   <param-value>/WEB-INF/springapp-servlet.xml</param-value>
+   <param-value>/WEB-INF/applicationContext.xml</param-value>
   </context-param>
 
+  <!-- ContextLoaderListener loads the configuration file(s) specified in the contextConfigLocation context parameter into Spring's root context. -->
+  <listener>
+     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  
   <!-- Configuring the log4j. Place the spring Log4jConfigListener as the first listener -->
   <listener>
      <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
   </listener>
   
-  <!-- Customize the file name and location ([servlet-name]-servlet.xml) by adding the servlet listener ContextLoaderListener -->
-  <listener>
-     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-  </listener>
 
+  <!-- DispatcherServlet then loads the servlet configuration into a separate context, with the root context as its parent.
+       This means that the settings in the servlet context can refer to, and even override, the settings in the root context. 
+   -->
   <servlet>
     <servlet-name>springapp</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
  
+  <!--  Send all .html files to the Spring dispatcher servlet -->
   <servlet-mapping>
     <servlet-name>springapp</servlet-name>
     <url-pattern>*.html</url-pattern>
