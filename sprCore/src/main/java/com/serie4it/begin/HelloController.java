@@ -16,4 +16,12 @@ public class HelloController {
         model.addAttribute("message", "HELLO!!!");
         return "hello";
     }
+    
+    @RequestMapping("/index.html")
+    public String handleRequestIndex(Model model) {
+ 
+        logger.info("Returning index view");
+        model.addAttribute("message", "index!!!");
+        return "index";
+    }    
 }

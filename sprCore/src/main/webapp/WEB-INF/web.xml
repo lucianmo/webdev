@@ -16,7 +16,7 @@
   <!-- Customize the file name and location for “root” context to host “shared resources” required by Servlets / Filters -->
   <context-param>
    <param-name>contextConfigLocation</param-name>
-   <param-value>/WEB-INF/applicationContext.xml</param-value>
+   <param-value>/WEB-INF/config/applicationContext.xml</param-value>
   </context-param>
 
   <!-- ContextLoaderListener loads the configuration file(s) specified in the contextConfigLocation context parameter into Spring's root context. -->
@@ -36,6 +36,12 @@
   <servlet>
     <servlet-name>springapp</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+				/WEB-INF/config/springapp-servlet.xml
+			</param-value>
+		</init-param>    
     <load-on-startup>1</load-on-startup>
   </servlet>
  
