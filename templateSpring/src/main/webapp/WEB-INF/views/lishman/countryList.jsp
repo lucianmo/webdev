@@ -4,15 +4,17 @@
 
 <html>
   <head>
-    <link rel="stylesheet" href="<c:url value='../static/css/world.css'/>" type="text/css"/>
-    <!-- <link rel="stylesheet" href="../static/css/world.css" type="text/css"/> -->
+    <%-- <link rel="stylesheet" href="<c:url value='../static/css/world.css'/>" type="text/css"/> --%>
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/world.css" type="text/css"/>
+    <%-- attribute href will be href="/templateSpring/static/css/world.css" --%>
     <title>
       <spring:message code="country.plural"/>
     </title>
   </head>
   <body>
     <h1><spring:message code="application.name"/></h1>
-
+	
     <table class="silver" width="150">
       <tr>
         <th><spring:message code="country.plural"/></th>
@@ -20,7 +22,7 @@
       <c:forEach items="${countries}" var="country">
         <tr>
           <td>
-            <a href="countryDetails.html?id=${country.id}">
+            <a href="countryDetails?id=${country.id}">
               ${country.name}
             </a>
           </td>

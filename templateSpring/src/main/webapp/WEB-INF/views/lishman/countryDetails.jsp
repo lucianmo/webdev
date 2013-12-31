@@ -4,7 +4,7 @@
 
 <html>
   <head>
-    <link rel="stylesheet" href="../static/css/world.css" type="text/css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/world.css" type="text/css"/>
     <title>
       <spring:message code="country.details"/>
     </title>
@@ -36,7 +36,7 @@
         <td>${country.currency}</td>
       </tr>
     </table>
-    <a href="countryList.html">
+    <a href="countryList">
       &lt;&lt;<spring:message code="navigation.back"/>
     </a>
   </body>

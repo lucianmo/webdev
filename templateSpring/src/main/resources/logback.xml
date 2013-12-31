@@ -31,7 +31,7 @@
     
     <!-- <logger name="org.springframework.transaction" level="INFO" /> -->
     <!-- <logger name="org.springframework.security" level="INFO" /> --> <!-- to debug security related issues (DEBUG) -->
-    <!-- <logger name="org.springframework.web.servlet.mvc" level="TRACE" /> --> <!-- some serialization issues are at trace level here: org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod -->
+    <logger name="org.springframework.web.servlet.mvc" level="trace" /> <!-- some serialization issues are at trace level here: org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod -->
     
     
 <!--The appender named "console" is attached to two loggers, to root and to "com.serie4it.sample". 
