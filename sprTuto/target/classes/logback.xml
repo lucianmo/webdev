@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+
+    <!-- To enable JMX Management -->
+    <jmxConfigurator/>
+
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${user.dir}/logs/app.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${user.dir}/logs/app.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%.-1level|%-40.40logger{0}|%msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%.-1level|%-40.40logger{0}|%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- <logger name="org.springframework" level="TRACE" /> -->
+    <logger name="org.springframework.beans" level="debug" />
+    
+    <!-- <logger name="org.springframework.transaction" level="INFO" /> -->
+    <!-- <logger name="org.springframework.security" level="INFO" /> --> <!-- to debug security related issues (DEBUG) -->
+    <!-- <logger name="org.springframework.web.servlet.mvc" level="trace" /> --> <!-- some serialization issues are at trace level here: org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod -->
+    
+    
+<!--The appender named "console" is attached to two loggers, to root and to "com.serie4it.sample".
+        Because the root logger is the ancestor of all loggers, logging request made by "com.serie4it.sample"
+        logger will be output twice. To avoid this behavior you can set additivity attribute to false,
+        and message will be printed only once. -->
+        <logger name="com.proj" level="info" additivity="false">
+         <appender-ref ref="console" />
+        </logger>
+
+        <!-- level: debug, info, warn, trace, error -->
+    <root level="info">
+        <appender-ref ref="console"/>
+        <appender-ref ref="file"/>
+    </root>
+</configuration>
