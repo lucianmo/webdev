@@ -10,7 +10,7 @@ public class AppTest {
     */
    public static void main(String[] args) {
       // 
-      ApplicationContext context = new ClassPathXmlApplicationContext("beansHello.xml");
+      ApplicationContext context = new ClassPathXmlApplicationContext("hello/beansHello.xml");
       HelloWorld obj = (HelloWorld) context.getBean("helloBean");
       obj.printHello();
    }
