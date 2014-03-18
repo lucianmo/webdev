@@ -1,0 +1,190 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.template</groupId>
+  <artifactId>sprWebTuto</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  
+  <name>template</name>
+  <packaging>war</packaging>
+  
+  <properties>
+		<!-- Generic properties -->
+		<jdk.version>1.6</jdk.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		
+		
+		<!-- Spring -->  		
+        <org.springframework.version>3.0.5.RELEASE</org.springframework.version> <!-- Spring 3.0.5.RELEASE or 3.2.2.RELEASE -->
+		<spring-data-jpa.version>1.4.2.RELEASE</spring-data-jpa.version>
+		
+		<!-- Java EE / Java SE dependencies -->
+		<javax.servlet.jstl.version>1.2</javax.servlet.jstl.version>
+
+		<!-- AOP -->
+		<org.aspectj-version>1.6.10</org.aspectj-version>
+
+		<!-- Logging Simple Logging Facade For Java. Native implementation of slf4j is logback -->
+		<logback.version>1.0.13</logback.version>
+		<slf4j.version>1.7.4</slf4j.version>
+		
+		<!-- Test -->
+		<junit.version>4.7</junit.version>
+
+		<!-- Jackson JSON Mapper -->
+		<!-- If Spring 3.0.5.RELEASE then jackson-mapper-asl 1.4.2 
+		     If Spring 3.2.2.RELEASE then jackson-mapper-asl 1.9.10 -->
+		<jackson.version>1.4.2</jackson.version>		
+  </properties>
+  
+  <dependencies>
+		<!-- Spring 3 Core -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${org.springframework.version}</version>
+			<exclusions>
+				<!-- Exclude Commons Logging in favor of SLF4j -->
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>            
+        </dependency>
+        
+        <!-- Spring MVC -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+		
+		<!-- AspectJ -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>${org.aspectj-version}</version>
+		</dependency>		 
+
+		<!-- Servlet -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>${javax.servlet.jstl.version}</version>
+        </dependency>
+
+		<!-- Logging with SLF4J & LogBack -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>		
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jul-to-slf4j</artifactId>
+            <version>${slf4j.version}</version>            
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-access</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+
+		<!-- Jackson JSON Mapper -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>${jackson.version}</version>
+		</dependency> 
+		        
+       <!-- Unit Test -->
+       <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${org.springframework.version}</version>
+            <scope>test</scope>
+       </dependency>	   
+       <dependency>
+         <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit.version}</version>
+        <scope>test</scope>
+       </dependency>
+  </dependencies>
+  
+  <build>
+    <finalName>sprWebTuto</finalName>
+    <defaultGoal>install</defaultGoal>
+	
+	<plugins>
+		<!-- use JDK 1.6 -->
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>2.3.2</version>
+			<configuration>
+				<source>${jdk.version}</source>
+				<target>${jdk.version}</target>
+			</configuration>
+		</plugin>
+	</plugins>
+	  
+    <resources>
+        <resource>
+            <directory>src/main/resources</directory>
+            <filtering>true</filtering>
+			<includes>
+				<include>test.properties</include>
+			</includes>            
+    	</resource>
+    	
+		<resource>
+			<directory>src/main/resources</directory>
+			<filtering>false</filtering>
+			<excludes>
+				<exclude>toto.properties</exclude>
+				<exclude>etc/**</exclude>
+			</excludes>
+		</resource>
+		
+<!-- 		<resource> -->
+<!-- 			<directory>src/main/resources/log4j</directory> -->
+<!-- 			<filtering>true</filtering> -->
+<!-- 			<includes> -->
+<!-- 				<include>log4j.properties</include> -->
+<!-- 			</includes> -->
+<!-- 		</resource> -->
+    </resources>
+    
+    <testResources>
+		<!-- declared explicitly so Spring config files can be placed next to their corresponding JUnit test class -->
+        <testResource>
+            <directory>${project.basedir}/src/test/resources</directory>
+            <filtering>true</filtering>
+        </testResource>
+		<testResource>
+		    <directory>${project.basedir}/src/test/resources</directory>
+		</testResource>		
+    </testResources>	      
+  </build>
+</project>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" 
+	xmlns="http://java.sun.com/xml/ns/j2ee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+  	<display-name>Template Spring Best Practices</display-name>
+	<!-- http://gordondickens.com/wordpress/2012/07/30/enterprise-spring-framework-best-practices-part-3-xml-config/ -->
+    <description>Enterprise Spring Best Practices Application</description>  
+
+    <!-- Creates the Spring Container, "root" context, shared by all Servlets and Filters -->
+	<!-- Customize the file name and location for "root" context -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <!-- This bootstrap file should use the <import resource=""/> to include other config files -->
+        <param-value>classpath*:META-INF/spring/applicationContext-bootstrap.xml</param-value>
+    </context-param>
+
+	<!-- This listener runs when the app is first started. It instantiates the ApplicationContext (from
+		 applicationContext-bootstrap.xml) and places a reference to it in the ServletContext -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+  <!-- Lets the bean definition file specify scopes of request and session. -->
+  <listener>
+    <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+  </listener>
+  
+     <!-- Use the URL http://localhost:8080/sprWebTuto/input-form for the InputServlet -->
+  <servlet>
+    <servlet-name>InputFormServlet</servlet-name>
+    <servlet-class>com.serie4it.coreservlets.InputFormServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>InputFormServlet</servlet-name>
+    <url-pattern>/input-form</url-pattern>
+  </servlet-mapping>
+
+  <!-- Use the URL http://hostname/app-name/get-customer
+       for the CustomerServlet -->
+  <servlet>
+    <servlet-name>Customer Lookup Servlet</servlet-name>
+    <servlet-class>com.serie4it.coreservlets.CustomerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Customer Lookup Servlet</servlet-name>
+    <url-pattern>/get-customer</url-pattern>
+  </servlet-mapping>
+    
+    <!-- Enable escaping of form submission contents -->
+    <context-param>
+        <param-name>defaultHtmlEscape</param-name>
+        <param-value>true</param-value>
+    </context-param>
+
+    <filter>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!--  -->  
+
+
+  
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/uncaughtException</location>
+    </error-page>
+
+	<!-- Disables Servlet Container welcome file handling. Needed for compatibility with Servlet 3.0 and Tomcat 7.0 -->
+    <welcome-file-list>
+        <welcome-file></welcome-file>
+    </welcome-file-list>
+</web-app>

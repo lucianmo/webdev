@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/util
+         http://www.springframework.org/schema/util/spring-util.xsd         
+         http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context.xsd
+         http://www.springframework.org/schema/jdbc
+         http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+<!--     <import resource="classpath:/META-INF/spring/applicationContext-persistence.xml"/> -->
+<!--     <import resource="classpath:/META-INF/spring/applicationContext-services.xml"/> -->
+
+	 <!-- Makes a ColorPreferences bean with default colors. -->
+    <bean id="colorPreferences" class="com.serie4it.coreservlets.ColorPreferences" scope="session">
+	    <property name="foreground" value="black"/>
+	    <property name="background" value="#fdf5e6"/>
+    </bean>
+  
+  <!-- Instantiates MapCustomerLookupService with a few sample customers. -->
+  <bean id="sampleLookupService" class="com.serie4it.coreservlets.MapCustomerLookupService">
+    <property name="sampleCustomers">
+      <map>
+        <entry key="a1234">
+          <bean class="com.serie4it.coreservlets.Customer">
+            <property name="customerID" value="a1234"/>
+            <property name="firstName" value="Rod"/>
+            <property name="lastName" value="Johnson"/>
+            <property name="balance" value="123.45"/>
+          </bean>
+        </entry>
+        <entry key="a1235">
+          <bean class="com.serie4it.coreservlets.Customer">
+            <property name="customerID" value="a1235"/>
+            <property name="firstName" value="Gary"/>
+            <property name="lastName" value="Mak"/>
+            <property name="balance" value="4567.89"/>
+          </bean>
+        </entry>
+        <entry key="a1236">
+          <bean class="com.serie4it.coreservlets.Customer">
+            <property name="customerID" value="a1236"/>
+            <property name="firstName" value="Craig"/>
+            <property name="lastName" value="Walls"/>
+            <property name="balance" value="78901.23"/>
+          </bean>
+        </entry>
+        <entry key="a1237">
+          <bean class="com.serie4it.coreservlets.Customer">
+            <property name="customerID" value="a1237"/>
+            <property name="firstName" value="Kyong"/>
+            <property name="lastName" value="Park"/>
+            <property name="balance" value="101112.13"/>
+          </bean>
+        </entry>
+      </map>
+    </property>
+  </bean>
+    
+    <!-- Enable handling of java.util.logging through SLF4J -->
+    <bean id="slf4JBridgeHandler" class="org.slf4j.bridge.SLF4JBridgeHandler"
+          init-method="removeHandlersForRootLogger"/>
+    <bean class="org.slf4j.bridge.SLF4JBridgeHandler"
+          init-method="install"
+          depends-on="slf4JBridgeHandler"/>
+
+</beans>
