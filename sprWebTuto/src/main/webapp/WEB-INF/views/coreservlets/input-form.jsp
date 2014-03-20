@@ -33,6 +33,11 @@
     <input type="submit" value="Show Balance"/>
   </form>
 </fieldset>
+<form name="toto" action="gateway.do" method="post">
+	<input type="hidden" name="user" value="123"/>
+	<input type="hidden" name="pass" value="abc"/>
+	<input type="submit" name="run" value="Submit Post"/>
+</form>
 <p/>
 
 

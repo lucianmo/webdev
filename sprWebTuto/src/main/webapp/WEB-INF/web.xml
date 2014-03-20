@@ -38,8 +38,7 @@
     <url-pattern>/input-form</url-pattern>
   </servlet-mapping>
 
-  <!-- Use the URL http://hostname/app-name/get-customer
-       for the CustomerServlet -->
+  <!-- Use the URL http://hostname/app-name/get-customer for the CustomerServlet -->
   <servlet>
     <servlet-name>Customer Lookup Servlet</servlet-name>
     <servlet-class>com.serie4it.coreservlets.CustomerServlet</servlet-class>
@@ -48,7 +47,16 @@
     <servlet-name>Customer Lookup Servlet</servlet-name>
     <url-pattern>/get-customer</url-pattern>
   </servlet-mapping>
-    
+
+  <servlet>
+    <servlet-name>TestServlet</servlet-name>
+    <servlet-class>com.serie4it.coreservlets.web.GatewayService</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TestServlet</servlet-name>
+    <url-pattern>/gateway.do</url-pattern>
+  </servlet-mapping>
+      
     <!-- Enable escaping of form submission contents -->
     <context-param>
         <param-name>defaultHtmlEscape</param-name>
