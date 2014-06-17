@@ -15,19 +15,16 @@ public class ScopeTest {
     System.out.println("Singleton beans from same context");
     singletonTest1("rectangle1");
     
-/*    System.out.println("Prototype beans from same context");
+    System.out.println("Prototype beans from same context");
     singletonTest1("rectangle2");
-    System.out.println
-                ("Singleton beans from different contexts");
-    singletonTest2("rectangle1");*/
+    System.out.println("Singleton beans from different contexts");
+    singletonTest2("rectangle1");
   }
   
   public static void singletonTest1(String beanName) {
     ApplicationContext context = new ClassPathXmlApplicationContext ("/coreservlets/introScope.xml");
-    Rectangle r1 = 
-      (Rectangle)context.getBean(beanName);
-    Rectangle r2 = 
-      (Rectangle)context.getBean(beanName);
+    Rectangle r1 = (Rectangle)context.getBean(beanName);
+    Rectangle r2 = (Rectangle)context.getBean(beanName);
     compareRectangles(r1, r2);
     r1.setLength(50);
     compareRectangles(r1, r2);
@@ -42,16 +39,12 @@ public class ScopeTest {
   }
   
   public static void singletonTest2(String beanName) {
-    ApplicationContext context1 =
-      new ClassPathXmlApplicationContext
-                            ("/scope-test.xml");
-    Rectangle r1 = 
-      (Rectangle)context1.getBean(beanName);
-    ApplicationContext context2 =
-      new ClassPathXmlApplicationContext
-                            ("/scope-test.xml");
-    Rectangle r2 = 
-      (Rectangle)context2.getBean(beanName);
+    ApplicationContext context1 = new ClassPathXmlApplicationContext ("/coreservlets/introScope.xml");
+    Rectangle r1 = (Rectangle)context1.getBean(beanName);
+    
+    ApplicationContext context2 = new ClassPathXmlApplicationContext ("/coreservlets/introScope.xml");
+    Rectangle r2 = (Rectangle)context2.getBean(beanName);
+    
     compareRectangles(r1, r2);
     r1.setLength(50);
     compareRectangles(r1, r2);

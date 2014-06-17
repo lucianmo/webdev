@@ -56,14 +56,14 @@ public class ShapeList {
     }
     
     public void printInfo() {
-      System.out.printf("ShapeList has %s entries%n", 
-                        shapes.size());
+      System.out.printf("ShapeList has %s entries%n", shapes.size());
       System.out.printf("  Smallest: ");
       getSmallestShape().printInfo();
+      
       System.out.printf("  Biggest: ");
       getBiggestShape().printInfo();
-      System.out.printf("  Total area: %,.2f%n", 
-                        getTotalArea());
+      
+      System.out.printf("  Total area: %,.2f%n", getTotalArea());
     }
    
 }

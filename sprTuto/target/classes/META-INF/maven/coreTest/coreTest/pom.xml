@@ -14,6 +14,7 @@
   <!-- Logging Simple Logging Facade For Java. Native implementation of slf4j is logback -->
   <logback.version>1.0.13</logback.version>
   <slf4j.version>1.7.4</slf4j.version>
+  <jackson.mapper>1.9.13</jackson.mapper>
                 
   <junit.version>4.11</junit.version>
   <jdk.version>1.6</jdk.version>  
@@ -73,7 +74,12 @@
             <version>${logback.version}</version>
         </dependency>                
 
-        
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>${jackson.mapper}</version>
+		</dependency>
+	        
        <!-- Unit Test -->
        <dependency>
          <groupId>junit</groupId>
