@@ -13,34 +13,48 @@
          http://www.springframework.org/schema/jdbc
          http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
+    <!--
+        This will automatically locate any and all property files you have
+        within your classpath, provided they fall under the META-INF/spring
+        directory. The located property files are parsed and their values can
+        then be used within application context files in the form of
+        ${propertyKey}.
+    -->	
+	<context:property-placeholder location="classpath*:META-INF/spring/*.properties"/>
+
+    <!--
+        This declaration will cause Spring to locate every @Component,
+        @Repository and @Service in your application. In practical terms this
+        allows you to write a POJO and then simply annotate the new POJO as an
+        @Service and Spring will automatically detect, instantiate and
+        dependency inject your service at startup time. Importantly, you can
+        then also have your new service injected into any other class that
+        requires it simply by declaring a field for your service inside the
+        relying class and Spring will inject it. Note that an exclude filter
+        is declared to avoid instantiating your @Controller classes, as these
+        should be instantiated by a web tier application context. Refer to
+        web.xml for more details about the web tier application context setup services.
+        
+        Furthermore, this turns on @Autowired, @PostConstruct etc support. These 
+        annotations allow you to use common Spring and Java Enterprise Edition 
+        annotations in your classes without needing to do any special configuration. 
+        The most commonly used annotation is @Autowired, which instructs Spring to
+        dependency inject an object into your class.
+    -->
+    
+    <context:component-scan base-package="com.serie4it">
+        <context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
+        <context:exclude-filter expression="org.springframework.stereotype.Repository" type="annotation"/>
+    </context:component-scan>
+
+    <!-- This will ensure that hibernate or jpa exceptions are automatically translated into
+         Spring's generic DataAccessException hierarchy -->
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+        
 	<!-- Root Context: defines shared resources visible to all other web components -->
     <import resource="classpath:/META-INF/spring/applicationContext-persistence.xml"/>
     <import resource="classpath:/META-INF/spring/applicationContext-services.xml"/>
 
-<!--<bean id="accountRepository" class="com.gordondickens.enterprisespring.repository.internal.AccountRepositoryImpl">
-        <constructor-arg ref="dataSource"/>
-    </bean>
-
-    <jdbc:embedded-database id="dataSource" type="HSQL">
-        <jdbc:script location="classpath:/mySchema.sql"/>
-        <jdbc:script location="classpath:/mySampleData.sql"/>
-    </jdbc:embedded-database>  -->
-
-    <!-- System.out.println & System.err.println handling through SLF4J -->
-<!--<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-        <property name="targetClass" value="uk.org.lidalia.sysoutslf4j.context.SysOutOverSLF4J"/>
-        <property name="staticMethod"
-                  value="uk.org.lidalia.sysoutslf4j.context.SysOutOverSLF4J.sendSystemOutAndErrToSLF4J"/>
-        <property name="arguments">
-            <list>
-                Set log level for System.out
-                <util:constant static-field="uk.org.lidalia.sysoutslf4j.context.LogLevel.DEBUG"/>
-                Set log level for System.err
-                <util:constant static-field="uk.org.lidalia.sysoutslf4j.context.LogLevel.ERROR"/>
-            </list>
-        </property>
-    </bean> -->
-    
         
     <!-- Enable handling of java.util.logging through SLF4J -->
     <bean id="slf4JBridgeHandler" class="org.slf4j.bridge.SLF4JBridgeHandler"
@@ -48,9 +62,5 @@
     <bean class="org.slf4j.bridge.SLF4JBridgeHandler"
           init-method="install"
           depends-on="slf4JBridgeHandler"/>
-
-    <!-- Enable Spring JMX -->
-<!--     <context:mbean-server/> -->
-<!--     <context:mbean-server/> -->
 
 </beans>
