@@ -20,6 +20,7 @@ import org.slf4j.LoggerFactory;
 * Spring can automatically detect controller classes using class path scanning, and make them available
 * to receive requests from end users.
 */
+@SuppressWarnings("unused")
 @Controller
 public class CountryController {
       static final Logger LOG = LoggerFactory.getLogger(CountryController.class);

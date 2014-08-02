@@ -3,7 +3,11 @@ There are mostly 2 reasons to that:
 - All Spring config files are grouped into one single place
 - It is simpler to reference them from inside JUnit tests
 
-The Spring Container, "root" context is in "classpath*:META-INF/spring/applicationContext-bootstrap.xml"
+http://stackoverflow.com/questions/18342671/best-configuration-for-spring-3-2-3
+The Spring Container, "root" context is in "classpath*:META-INF/spring/applicationContext-bootstrap.xml". 
+It allows you to configure your beans, or to indicate the context of your application. 
+This is the place where you define your business logic beans, resources, and all other beans that are not directly 
+related to the web tier.
 This bootstrap file should use the <import resource=""/> to include other config files.
 
 DispatcherServlet then loads the servlet configuration into a separate context, with the root context as its parent.
