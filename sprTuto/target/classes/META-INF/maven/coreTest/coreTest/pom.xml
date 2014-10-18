@@ -8,9 +8,12 @@
 
 <properties>
   <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  <org.springframework.version>3.2.4.RELEASE</org.springframework.version>
+  <org.springframework.version>4.0.3.RELEASE</org.springframework.version>
   <javax.servlet.jstl.version>1.2</javax.servlet.jstl.version>
-  
+
+  <!-- Hibernate / JPA -->	
+  <hibernate.version>3.6.9.Final</hibernate.version>
+		  
   <!-- Logging Simple Logging Facade For Java. Native implementation of slf4j is logback -->
   <logback.version>1.0.13</logback.version>
   <slf4j.version>1.7.4</slf4j.version>
@@ -21,7 +24,7 @@
 </properties>
   
 <dependencies>
-        <!-- Spring 3 Core -->
+        <!-- Spring 4 Core -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
@@ -39,8 +42,19 @@
                                 </exclusion>
                         </exclusions>
         </dependency>
-        
-
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+		        
+		<!-- Spring ORM support -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+		
         <!-- Logging -->
         <!-- Logging with SLF4J & LogBack -->
         <dependency>
@@ -78,6 +92,29 @@
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>${jackson.mapper}</version>
+		</dependency>
+
+		<!-- Hibernate -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.9</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
 		</dependency>
 	        
        <!-- Unit Test -->

@@ -1,3 +1,5 @@
+Run as > Java application > /sprTuto/src/main/java/com/proj/journaldev/app/SpringHibernateMain.java 
+
 I|ClassPathXmlApplicationContext          |Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@4e79f1: startup date [Sat Oct 18 13:21:45 EDT 2014]; root of context hierarchy
 I|XmlBeanDefinitionReader                 |Loading XML bean definitions from class path resource [journaldev/spring.xml]
 D|DefaultDocumentLoader                   |Using JAXP provider [com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl]
@@ -86,6 +88,10 @@ D|DefaultListableBeanFactory              |Returning cached instance of singleto
 D|DefaultListableBeanFactory              |Finished creating instance of bean 'personDAO'
 D|DefaultListableBeanFactory              |Returning cached instance of singleton bean 'lifecycleProcessor'
 D|DefaultListableBeanFactory              |Returning cached instance of singleton bean 'personDAO'
+Person::id=3, name=Eva, country=Rai
+Person List::id=1, name=toto, country=alaska
+Person List::id=2, name=adam, country=rai
+Person List::id=3, name=Eva, country=Rai
 I|ClassPathXmlApplicationContext          |Closing org.springframework.context.support.ClassPathXmlApplicationContext@4e79f1: startup date [Sat Oct 18 13:21:45 EDT 2014]; root of context hierarchy
 D|DefaultListableBeanFactory              |Returning cached instance of singleton bean 'lifecycleProcessor'
 D|DefaultListableBeanFactory              |Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@cf66b: defining beans [dataSource,hibernate3AnnotatedSessionFactory,personDAO]; root of factory hierarchy
