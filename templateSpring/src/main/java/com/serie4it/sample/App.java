@@ -20,9 +20,9 @@ public class App {
       ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring/applicationContext-bootstrap.xml");
 
       Employee em = new Employee();
-      em.setId("1031");
-      em.setName("Adam");
-      em.setAge(25);
+      em.setId("1040");
+      em.setName("Jean");
+      em.setAge(88);
 
       EmployeeService emService = (EmployeeService) context.getBean("employeeService");
       emService.persistEmployee(em);

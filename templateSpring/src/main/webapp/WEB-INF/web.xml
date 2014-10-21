@@ -44,17 +44,6 @@
         <filter-name>CharacterEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-
-    <!-- Filter that binds a JPA EntityManager to the thread for the entire processing of the request -->
-    <filter>
-        <filter-name>OpenEntityManagerInViewFilter</filter-name>
-        <filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
-    </filter>
-    
-    <filter-mapping>
-        <filter-name>OpenEntityManagerInViewFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
             
     <!-- Servlet that dispatches request to registered handlers (Controller implementations). -->
     <!-- DispatcherServlet then loads the servlet configuration into a separate context, with the root context as its parent.

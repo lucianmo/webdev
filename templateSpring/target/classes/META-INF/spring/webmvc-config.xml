@@ -53,6 +53,4 @@
         <property name="suffix" value=".jsp" />
     </bean>
 
-	<!-- Load bootstrap related configuration -->
-	<import resource="classpath:/META-INF/spring/applicationContext-bootstrap.xml" />    		    
 </beans>        

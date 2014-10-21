@@ -1,6 +1,9 @@
 package com.serie4it.sample.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,13 +12,20 @@ import com.serie4it.sample.domain.Employee;
 
 @Service("employeeService")
 public class EmployeeServiceImpl implements EmployeeService{
-
-	@Autowired
-	EmployeeDAO employeeDAO;
 	
+   private static final Logger logger = LoggerFactory.getLogger(EmployeeServiceImpl.class);
+   
+	EmployeeDAO employeeDAO;
+
+	@Autowired(required=true)
+	@Qualifier(value="employeeDAO")
+	public void setEmployeeDAO(EmployeeDAO employeeDAO) {
+	   this.employeeDAO = employeeDAO;
+	}
+	  
 	@Override
 	@Transactional
-	public void persistEmployee(Employee employee) {
+	public void persistEmployee(Employee employee) {	   
 		employeeDAO.persistEmployee(employee);
 		
 	}
@@ -23,6 +33,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 	@Override
 	@Transactional
 	public void updateEmployee(Employee employee) {
+	   logger.info("Employee updated successfully, Employee Details="+employee);
 		employeeDAO.updateEmployee(employee);
 		
 	}
@@ -39,4 +50,8 @@ public class EmployeeServiceImpl implements EmployeeService{
 		
 	}
 
+	public EmployeeDAO getEmployeeDAO() {
+	   return this.employeeDAO;
+	}
+		   
 }

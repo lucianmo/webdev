@@ -44,16 +44,11 @@
     
     <context:component-scan base-package="com.serie4it.sample">
         <context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
-        <context:exclude-filter expression="org.springframework.stereotype.Repository" type="annotation"/>
     </context:component-scan>
-
-    <!-- This will ensure that hibernate or jpa exceptions are automatically translated into
-         Spring's generic DataAccessException hierarchy -->
-    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
         
 	<!-- Root Context: defines shared resources visible to all other web components -->
     <import resource="classpath:/META-INF/spring/applicationContext-persistence.xml"/>
-    <import resource="classpath:/META-INF/spring/applicationContext-services.xml"/>
+    <!--<import resource="classpath:/META-INF/spring/applicationContext-services.xml"/> -->
 
         
     <!-- Enable handling of java.util.logging through SLF4J -->

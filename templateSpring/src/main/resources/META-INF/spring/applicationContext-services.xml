@@ -8,7 +8,6 @@
          http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- Include only the components in the service package and below -->
-    <context:component-scan
-            base-package="com.serie4it.sample.service"/>
+    <context:component-scan base-package="com.serie4it.sample.service"/>
 
 </beans>

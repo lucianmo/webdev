@@ -1,3 +1,5 @@
+1.Spring config
+============================================================================================================================
 All Spring config files (including Spring MVC ones) are inside src/main/resource.
 There are mostly 2 reasons to that:
 - All Spring config files are grouped into one single place
@@ -11,7 +13,35 @@ related to the web tier.
 This bootstrap file should use the <import resource=""/> to include other config files.
 
 DispatcherServlet then loads the servlet configuration into a separate context, with the root context as its parent.
-Is finded in /WEB-INF/spring/webmvc-config.xml.
+Is finded in classpath*:META-INF/spring/webmvc-config.xml.
+
+
+2.Test Hibernate only application
+===========================================================================================================================
+Run as > java application: /templateSpring/src/main/java/com/serie4it/sample/App.java
+
+I|App                                     |load context
+I|ClassPathXmlApplicationContext          |Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@1d80e6d: startup date [Sun Sep 14 19:15:57 EDT 2014]; root of context hierarchy
+I|XmlBeanDefinitionReader                 |Loading XML bean definitions from class path resource [META-INF/spring/applicationContext-bootstrap.xml]
+I|XmlBeanDefinitionReader                 |Loading XML bean definitions from class path resource [META-INF/spring/applicationContext-persistence.xml]
+I|XmlBeanDefinitionReader                 |Loading XML bean definitions from class path resource [META-INF/spring/applicationContext-services.xml]
+I|PropertySourcesPlaceholderConfigurer    |Loading properties file from file [C:\DevLM\eclipse\work\spaceGen\templateSpring\target\classes\META-INF\spring\database.properties]
+I|Version                                 |HCANN000001: Hibernate Commons Annotations {4.0.4.Final}
+I|Version                                 |HHH000412: Hibernate Core {4.3.5.Final}
+I|Environment                             |HHH000206: hibernate.properties not found
+I|Environment                             |HHH000021: Bytecode provider name : javassist
+I|Dialect                                 |HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+I|LobCreatorBuilder                       |HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [3] less than 4
+I|TransactionFactoryInitiator             |HHH000399: Using default transaction strategy (direct JDBC transactions)
+I|ASTQueryTranslatorFactory               |HHH000397: Using ASTQueryTranslatorFactory
+I|Version                                 |Hibernate Validator 4.0.2.GA
+I|DefaultTraversableResolver              |Instantiated an instance of org.hibernate.validator.engine.resolver.JPATraversableResolver.
+I|HibernateTransactionManager             |Using DataSource [org.apache.commons.dbcp.BasicDataSource@1b071c0] of Hibernate SessionFactory for HibernateTransactionManager
+Hibernate: insert into EMPLOYEE (AGE, NAME, ID) values (?, ?, ?)
+
+
+3.
+===========================================================================================================================
 
 
 

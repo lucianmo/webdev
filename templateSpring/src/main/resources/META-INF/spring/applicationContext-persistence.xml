@@ -15,7 +15,7 @@
 
     <!-- Include both the Repository and Domain (entity) packages -->
     <!-- Read in DAOs from the hibernate package -->
-    <context:component-scan base-package="com.serie4it.sample.repository,com.serie4it.sample.domain"/>
+    <context:component-scan base-package="com.serie4it.sample" />
     
 	<!-- Basic DataSource -->
     <bean id="galleryDataSource"
@@ -25,57 +25,46 @@
           p:username="${jdbc.username}"
           p:password="${jdbc.password}"/>
 
-	<!-- Declare the Hibernate SessionFactory for retrieving Hibernate sessions -->
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"
-          p:dataSource-ref="galleryDataSource"
-          p:lobHandler-ref="defaultLobHandler">
+	<!-- Declare the Hibernate SessionFactory for retrieving Hibernate sessions --><!-- Hibernate 4 SessionFactory Bean definition -->
+    <bean id="hibernate4AnnotatedSessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
+          p:dataSource-ref="galleryDataSource">
+
         <property name="annotatedClasses">
             <list>
             	<value>com.serie4it.sample.domain.Employee</value>
+            	<value>com.serie4it.sample.domain.Person</value>
             </list>
         </property>
-        
+          
 	    <property name="hibernateProperties">
 	      <props>
-	        <prop 
-	         key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+	        <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
 	        <prop key="hibernate.show_sql">true</prop>
 	      </props>
 	    </property>
-<!--         <property name="hibernateProperties"> -->
-<!--             <value> -->
-<!--                 hibernate.dialect=${hibernate.dialect} -->
-<!--                 hibernate.jdbc.batch_size=${hibernate.jdbc.batch_size} -->
-<!--                 hibernate.c3p0.max_size=${hibernate.c3p0.max_size} -->
-<!--                 hibernate.c3p0.min_size=${hibernate.c3p0.min_size} -->
-<!--                 hibernate.c3p0.timeout=${hibernate.c3p0.timeout} -->
-<!--                 hibernate.c3p0.max_statements=${hibernate.c3p0.max_statements} -->
-<!--                 hibernate.c3p0.idle_test_period=${hibernate.c3p0.idle_test_period} -->
-<!--                 hibernate.c3p0.acquire_increment=${hibernate.c3p0.acquire_increment} -->
-<!--                 hibernate.c3p0.validate=${hibernate.c3p0.validate} -->
-<!--                 hibernate.cache.provider_class=${hibernate.cache.provider_class} -->
-<!--                 hibernate.connection.provider_class=${hibernate.connection.provider_class} -->
-<!--                 hibernate.show_sql=${hibernate.show_sql} -->
-<!--                 hibernate.hbm2ddl.auto=update -->
-<!--                 hibernate.cache.use_second_level_cache=true -->
-<!--                 hibernate.cache.use_query_cache=true -->
-<!--                 hibernate.search.default.directory_provider=${hibernate.search.default.directory_provider} -->
-<!--                 hibernate.search.default.indexBase=${hibernate.search.default.indexBase} -->
-<!--                 hibernate.search.default.batch.merge_factor=${hibernate.search.default.batch.merge_factor} -->
-<!--                 hibernate.search.default.batch.max_buffered_docs=${hibernate.search.default.batch.max_buffered_docs} -->
-<!--             </value> -->
-<!--         </property> -->
     </bean>
 
-    <!-- Database LOB Handling -->
-    <bean id="defaultLobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler"/>
-              	
-    <!-- Transaction Config -->
-    <bean id="transactionManager"
-          class="org.springframework.orm.hibernate3.HibernateTransactionManager"
-          p:sessionFactory-ref="sessionFactory"/>
-          
+    <bean id="employeeDAO" class="com.serie4it.sample.repository.EmployeeDAOImpl">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+    </bean>
+    <bean id="employeeService" class="com.serie4it.sample.service.EmployeeServiceImpl">
+        <property name="employeeDAO" ref="employeeDAO"></property>
+    </bean>
+
+    <bean id="personDAO" class="com.serie4it.sample.repository.PersonDAOImpl">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+    </bean>
+    <bean id="personService" class="com.serie4it.sample.service.PersonServiceImpl">
+        <property name="personDAO" ref="personDAO"></property>
+    </bean>
+        
     <!-- Enable annotation style of managing transactions -->
 	<tx:annotation-driven transaction-manager="transactionManager" />	
+	              	
+    <!-- Transaction Config -->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager" >
+          <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+    </bean>      
+
 	
 </beans>

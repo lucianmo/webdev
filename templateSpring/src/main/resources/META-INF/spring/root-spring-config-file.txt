@@ -1,7 +1,0 @@
-http://stackoverflow.com/questions/18342671/best-configuration-for-spring-3-2-3
-
-/WEB-INF/applicationContext.xml allows you to configure your beans, or to indicate the context of your application. 
-This is the place where you define your business logic beans, resources, and all other beans that are not directly 
-related to the web tier.
-
-
