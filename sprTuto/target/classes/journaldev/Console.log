@@ -1,6 +1,56 @@
+======================================================================================================================================================
+Hibernate Tutorial using Annotations
+http://www.journaldev.com/2882/hibernate-tutorial-for-beginners-using-xml-annotations-and-property-configurations
+
+Sql script
+CREATE TABLE `test`.`Employee` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) DEFAULT NULL,
+  `role` varchar(20) DEFAULT NULL,
+  `insert_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+
+Run as > Java application > /sprTuto/src/main/java/com/proj/journaldev/app/EmploeeAnnotationTest.java 
+
+I|Version                                 |HCANN000001: Hibernate Commons Annotations {4.0.4.Final}
+I|Version                                 |HHH000412: Hibernate Core {4.3.5.Final}
+I|Environment                             |HHH000206: hibernate.properties not found
+I|Environment                             |HHH000021: Bytecode provider name : javassist
+I|Configuration                           |HHH000043: Configuring from resource: journaldev/hibernate-annotation.cfg.xml
+I|Configuration                           |HHH000040: Configuration resource: journaldev/hibernate-annotation.cfg.xml
+I|Configuration                           |HHH000041: Configured SessionFactory: null
+I|HibernateUtil                           |Hibernate Annotation Configuration loaded
+I|HibernateUtil                           |Hibernate Annotation serviceRegistry created
+W|DriverManagerConnectionProviderImpl     |HHH000402: Using Hibernate built-in connection pool (not for production use!)
+I|DriverManagerConnectionProviderImpl     |HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://127.0.0.1:3306/test]
+I|DriverManagerConnectionProviderImpl     |HHH000046: Connection properties: {user=local, password=****}
+I|DriverManagerConnectionProviderImpl     |HHH000006: Autocommit mode: false
+I|DriverManagerConnectionProviderImpl     |HHH000115: Hibernate connection pool size: 20 (min=1)
+I|Dialect                                 |HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+I|LobCreatorBuilder                       |HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [3] less than 4
+I|TransactionFactoryInitiator             |HHH000399: Using default transaction strategy (direct JDBC transactions)
+I|ASTQueryTranslatorFactory               |HHH000397: Using ASTQueryTranslatorFactory
+I|EmploeeAnnotationTest                   |Employee ID=1
+I|DriverManagerConnectionProviderImpl     |HHH000030: Cleaning up connection pool [jdbc:mysql://127.0.0.1:3306/test]
+
+======================================================================================================================================================
+
+Spring Hibernate Integration
+http://www.journaldev.com/3524/spring-hibernate-integration-example-tutorial-spring-4-hibernate-3-and-hibernate-4
+
+Sql script
+CREATE TABLE `test`.`Person` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL DEFAULT '',
+  `country` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+commit;
+
 Run as > Java application > /sprTuto/src/main/java/com/proj/journaldev/app/SpringHibernateMain.java 
 
-I|ClassPathXmlApplicationContext          |Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@4e79f1: startup date [Sat Oct 18 13:21:45 EDT 2014]; root of context hierarchy
+I|ClassPathXmlApplicationContext          |Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@4e79f1: startup date [Wed Oct 22 20:08:42 EDT 2014]; root of context hierarchy
 I|XmlBeanDefinitionReader                 |Loading XML bean definitions from class path resource [journaldev/spring.xml]
 D|DefaultDocumentLoader                   |Using JAXP provider [com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl]
 D|PluggableSchemaResolver                 |Loading schema mappings from [META-INF/spring.schemas]
@@ -8,94 +58,41 @@ D|PluggableSchemaResolver                 |Loaded schema mappings: {http://www.s
 D|PluggableSchemaResolver                 |Found XML schema [http://www.springframework.org/schema/beans/spring-beans.xsd] in classpath: org/springframework/beans/factory/xml/spring-beans-4.0.xsd
 D|DefaultBeanDefinitionDocumentReader     |Loading bean definitions
 D|XmlBeanDefinitionReader                 |Loaded 3 bean definitions from location pattern [journaldev/spring.xml]
-D|DefaultListableBeanFactory              |Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@cf66b: defining beans [dataSource,hibernate3AnnotatedSessionFactory,personDAO]; root of factory hierarchy
+D|DefaultListableBeanFactory              |Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@71dc3d: defining beans [dataSource,hibernate4AnnotatedSessionFactory,personDAO]; root of factory hierarchy
 D|DefaultListableBeanFactory              |Creating shared instance of singleton bean 'dataSource'
 D|DefaultListableBeanFactory              |Creating instance of bean 'dataSource'
 D|DefaultListableBeanFactory              |Eagerly caching bean 'dataSource' to allow for resolving potential circular references
 D|DefaultListableBeanFactory              |Finished creating instance of bean 'dataSource'
-D|DefaultListableBeanFactory              |Creating shared instance of singleton bean 'hibernate3AnnotatedSessionFactory'
-D|DefaultListableBeanFactory              |Creating instance of bean 'hibernate3AnnotatedSessionFactory'
-D|DefaultListableBeanFactory              |Eagerly caching bean 'hibernate3AnnotatedSessionFactory' to allow for resolving potential circular references
+D|DefaultListableBeanFactory              |Creating shared instance of singleton bean 'hibernate4AnnotatedSessionFactory'
+D|DefaultListableBeanFactory              |Creating instance of bean 'hibernate4AnnotatedSessionFactory'
+D|DefaultListableBeanFactory              |Eagerly caching bean 'hibernate4AnnotatedSessionFactory' to allow for resolving potential circular references
 D|DefaultListableBeanFactory              |Returning cached instance of singleton bean 'dataSource'
-D|DefaultListableBeanFactory              |Invoking afterPropertiesSet() on bean with name 'hibernate3AnnotatedSessionFactory'
-I|Version                                 |Hibernate Commons Annotations 3.2.0.Final
-I|Environment                             |Hibernate 3.6.9.Final
-I|Environment                             |hibernate.properties not found
-I|Environment                             |Bytecode provider name : javassist
-I|Environment                             |using JDK 1.4 java.sql.Timestamp handling
-I|AnnotationBinder                        |Binding entity from annotated class: com.proj.journaldev.model.Person
-I|EntityBinder                            |Bind entity com.proj.journaldev.model.Person on table PERSON
-I|Configuration                           |Hibernate Validator not found: ignoring
-I|AnnotationSessionFactoryBean            |Building new Hibernate SessionFactory
-I|HibernateSearchEventListenerRegister    |Unable to find org.hibernate.search.event.FullTextIndexEventListener on the classpath. Hibernate Search is not enabled.
-I|ConnectionProviderFactory               |Initializing connection provider: org.springframework.orm.hibernate3.LocalDataSourceConnectionProvider
-I|Dialect                                 |Using dialect: org.hibernate.dialect.MySQLDialect
-I|JdbcSupportLoader                       |Disabling contextual LOB creation as JDBC driver reported JDBC version [3] less than 4
-I|SettingsFactory                         |Database ->
-       name : MySQL
-    version : 5.6.21-log
-      major : 5
-      minor : 6
-I|SettingsFactory                         |Driver ->
-       name : MySQL-AB JDBC Driver
-    version : mysql-connector-java-5.1.9 ( Revision: ${svn.Revision} )
-      major : 5
-      minor : 1
-I|TransactionFactoryFactory               |Transaction strategy: org.springframework.orm.hibernate3.SpringTransactionFactory
-I|TransactionManagerLookupFactory         |No TransactionManagerLookup configured (in JTA environment, use of read-write or transactional second-level cache is not recommended)
-I|SettingsFactory                         |Automatic flush during beforeCompletion(): disabled
-I|SettingsFactory                         |Automatic session close at end of transaction: disabled
-I|SettingsFactory                         |JDBC batch size: 15
-I|SettingsFactory                         |JDBC batch updates for versioned data: disabled
-I|SettingsFactory                         |Scrollable result sets: enabled
-I|SettingsFactory                         |JDBC3 getGeneratedKeys(): enabled
-I|SettingsFactory                         |Connection release mode: auto
-I|SettingsFactory                         |Maximum outer join fetch depth: 2
-I|SettingsFactory                         |Default batch fetch size: 1
-I|SettingsFactory                         |Generate SQL with comments: disabled
-I|SettingsFactory                         |Order SQL updates by primary key: disabled
-I|SettingsFactory                         |Order SQL inserts for batching: disabled
-I|SettingsFactory                         |Query translator: org.hibernate.hql.ast.ASTQueryTranslatorFactory
-I|ASTQueryTranslatorFactory               |Using ASTQueryTranslatorFactory
-I|SettingsFactory                         |Query language substitutions: {}
-I|SettingsFactory                         |JPA-QL strict compliance: disabled
-I|SettingsFactory                         |Second-level cache: enabled
-I|SettingsFactory                         |Query cache: disabled
-I|SettingsFactory                         |Cache region factory : org.hibernate.cache.impl.NoCachingRegionFactory
-I|SettingsFactory                         |Optimize cache for minimal puts: disabled
-I|SettingsFactory                         |Structured second-level cache entries: disabled
-I|SettingsFactory                         |Statistics: disabled
-I|SettingsFactory                         |Deleted entity synthetic identifier rollback: disabled
-I|SettingsFactory                         |Default entity-mode: pojo
-I|SettingsFactory                         |Named query checking : enabled
-I|SettingsFactory                         |Check Nullability in Core (should be disabled when Bean Validation is on): enabled
-I|SessionFactoryImpl                      |building session factory
-I|BasicTypeRegistry                       |Type registration [wrapper_characters_clob] overrides previous : org.hibernate.type.CharacterArrayClobType@1f7708
-I|BasicTypeRegistry                       |Type registration [materialized_clob] overrides previous : org.hibernate.type.MaterializedClobType@1bfbfb8
-I|BasicTypeRegistry                       |Type registration [blob] overrides previous : org.hibernate.type.BlobType@1c3e9ba
-I|BasicTypeRegistry                       |Type registration [java.sql.Blob] overrides previous : org.hibernate.type.BlobType@1c3e9ba
-I|BasicTypeRegistry                       |Type registration [wrapper_materialized_blob] overrides previous : org.hibernate.type.WrappedMaterializedBlobType@125d61e
-I|BasicTypeRegistry                       |Type registration [clob] overrides previous : org.hibernate.type.ClobType@10c6cfc
-I|BasicTypeRegistry                       |Type registration [java.sql.Clob] overrides previous : org.hibernate.type.ClobType@10c6cfc
-I|BasicTypeRegistry                       |Type registration [materialized_blob] overrides previous : org.hibernate.type.MaterializedBlobType@c72243
-I|BasicTypeRegistry                       |Type registration [characters_clob] overrides previous : org.hibernate.type.PrimitiveCharacterArrayClobType@19a8416
-I|SessionFactoryObjectFactory             |Not binding factory to JNDI, no JNDI name configured
-D|DefaultListableBeanFactory              |Finished creating instance of bean 'hibernate3AnnotatedSessionFactory'
+D|DefaultListableBeanFactory              |Invoking afterPropertiesSet() on bean with name 'hibernate4AnnotatedSessionFactory'
+I|Version                                 |HCANN000001: Hibernate Commons Annotations {4.0.4.Final}
+I|Version                                 |HHH000412: Hibernate Core {4.3.5.Final}
+I|Environment                             |HHH000206: hibernate.properties not found
+I|Environment                             |HHH000021: Bytecode provider name : javassist
+I|Dialect                                 |HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+I|LobCreatorBuilder                       |HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [3] less than 4
+I|TransactionFactoryInitiator             |HHH000399: Using default transaction strategy (direct JDBC transactions)
+I|ASTQueryTranslatorFactory               |HHH000397: Using ASTQueryTranslatorFactory
+D|DefaultListableBeanFactory              |Finished creating instance of bean 'hibernate4AnnotatedSessionFactory'
 D|DefaultListableBeanFactory              |Creating shared instance of singleton bean 'personDAO'
 D|DefaultListableBeanFactory              |Creating instance of bean 'personDAO'
 D|DefaultListableBeanFactory              |Eagerly caching bean 'personDAO' to allow for resolving potential circular references
-D|DefaultListableBeanFactory              |Returning cached instance of singleton bean 'hibernate3AnnotatedSessionFactory'
+D|DefaultListableBeanFactory              |Returning cached instance of singleton bean 'hibernate4AnnotatedSessionFactory'
 D|DefaultListableBeanFactory              |Finished creating instance of bean 'personDAO'
 D|DefaultListableBeanFactory              |Returning cached instance of singleton bean 'lifecycleProcessor'
 D|DefaultListableBeanFactory              |Returning cached instance of singleton bean 'personDAO'
-Person::id=3, name=Eva, country=Rai
-Person List::id=1, name=toto, country=alaska
-Person List::id=2, name=adam, country=rai
-Person List::id=3, name=Eva, country=Rai
-I|ClassPathXmlApplicationContext          |Closing org.springframework.context.support.ClassPathXmlApplicationContext@4e79f1: startup date [Sat Oct 18 13:21:45 EDT 2014]; root of context hierarchy
+Person::id=7, name=Eva, country=Rai
+Person List::id=4, name=alibaba, country=arabie
+Person List::id=5, name=gavril, country=poveste
+Person List::id=6, name=lambada, country=caraibe
+Person List::id=7, name=Eva, country=Rai
+I|ClassPathXmlApplicationContext          |Closing org.springframework.context.support.ClassPathXmlApplicationContext@4e79f1: startup date [Wed Oct 22 20:08:42 EDT 2014]; root of context hierarchy
 D|DefaultListableBeanFactory              |Returning cached instance of singleton bean 'lifecycleProcessor'
-D|DefaultListableBeanFactory              |Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@cf66b: defining beans [dataSource,hibernate3AnnotatedSessionFactory,personDAO]; root of factory hierarchy
-D|DisposableBeanAdapter                   |Invoking destroy() on bean with name 'hibernate3AnnotatedSessionFactory'
-I|AnnotationSessionFactoryBean            |Closing Hibernate SessionFactory
-I|SessionFactoryImpl                      |closing
+D|DefaultListableBeanFactory              |Destroying singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@71dc3d: defining beans [dataSource,hibernate4AnnotatedSessionFactory,personDAO]; root of factory hierarchy
+D|DisposableBeanAdapter                   |Invoking destroy() on bean with name 'hibernate4AnnotatedSessionFactory'
 D|DisposableBeanAdapter                   |Invoking destroy method 'close' on bean with name 'dataSource'
+
+======================================================================================================================================================
