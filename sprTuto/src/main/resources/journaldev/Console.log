@@ -48,7 +48,7 @@ CREATE TABLE `test`.`Person` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 commit;
 
-Run as > Java application > /sprTuto/src/main/java/com/proj/journaldev/app/SpringHibernateMain.java 
+Run as > Java application > /com/proj/journaldev/app/PersonIntregationTest.java 
 
 I|ClassPathXmlApplicationContext          |Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@4e79f1: startup date [Wed Oct 22 20:08:42 EDT 2014]; root of context hierarchy
 I|XmlBeanDefinitionReader                 |Loading XML bean definitions from class path resource [journaldev/spring.xml]
@@ -96,3 +96,50 @@ D|DisposableBeanAdapter                   |Invoking destroy() on bean with name 
 D|DisposableBeanAdapter                   |Invoking destroy method 'close' on bean with name 'dataSource'
 
 ======================================================================================================================================================
+Hibernate One to One Mapping Annotation
+http://www.journaldev.com/2916/hibernate-one-to-one-mapping-annotation-and-xml-configuration-example
+http://examples.javacodegeeks.com/enterprise-java/hibernate/hibernate-one-to-one-relationship-example-xml-mapping-and-annotation/
+http://www.beingjavaguys.com/2013/09/hibernate-one-to-one-mapping.html
+
+DROP TABLE IF EXISTS `student`;
+CREATE TABLE `student` (
+  `STUDENT_ID` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `STUDENT_NAME` VARCHAR(10) NOT NULL,
+  `STUDENT_AGE` VARCHAR(20) NOT NULL,
+  PRIMARY KEY (`STUDENT_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `student_information`;
+CREATE TABLE  `student_information` (
+ `STUDENT_ID` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+ `ADDRESS` VARCHAR(100) NOT NULL,
+ `REGISTRY_NUMBER` VARCHAR(255),
+ `PHONE_NUMBER` VARCHAR(255),
+ `ENLISTED` DATE NOT NULL,
+ PRIMARY KEY (`STUDENT_ID`) ,
+ CONSTRAINT `FK_STUDENT_ID` FOREIGN KEY (`STUDENT_ID`) REFERENCES `student` (`STUDENT_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+I|Version                                 |HCANN000001: Hibernate Commons Annotations {4.0.4.Final}
+I|Version                                 |HHH000412: Hibernate Core {4.3.5.Final}
+I|Environment                             |HHH000206: hibernate.properties not found
+I|Environment                             |HHH000021: Bytecode provider name : javassist
+I|Configuration                           |HHH000043: Configuring from resource: journaldev/hibernate-annotation.cfg.xml
+I|Configuration                           |HHH000040: Configuration resource: journaldev/hibernate-annotation.cfg.xml
+I|Configuration                           |HHH000041: Configured SessionFactory: null
+I|HibernateUtil                           |   >>> Hibernate Annotation Configuration loaded
+I|HibernateUtil                           |   >>> Hibernate Annotation serviceRegistry created
+W|DriverManagerConnectionProviderImpl     |HHH000402: Using Hibernate built-in connection pool (not for production use!)
+I|DriverManagerConnectionProviderImpl     |HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql://127.0.0.1:3306/test]
+I|DriverManagerConnectionProviderImpl     |HHH000046: Connection properties: {user=local, password=****}
+I|DriverManagerConnectionProviderImpl     |HHH000006: Autocommit mode: false
+I|DriverManagerConnectionProviderImpl     |HHH000115: Hibernate connection pool size: 20 (min=1)
+I|Dialect                                 |HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+I|LobCreatorBuilder                       |HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [3] less than 4
+I|TransactionFactoryInitiator             |HHH000399: Using default transaction strategy (direct JDBC transactions)
+I|ASTQueryTranslatorFactory               |HHH000397: Using ASTQueryTranslatorFactory
+Hibernate: insert into STUDENT (STUDENT_AGE, STUDENT_NAME) values (?, ?)
+Hibernate: insert into student_information (ADDRESS, ENLISTED, PHONE_NUMBER, REGISTRY_NUMBER, STUDENT_ID) values (?, ?, ?, ?, ?)
+I|OneToOneTest                            |   >>> Student ID=1
+I|DriverManagerConnectionProviderImpl     |HHH000030: Cleaning up connection pool [jdbc:mysql://127.0.0.1:3306/test]
+

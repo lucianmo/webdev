@@ -17,13 +17,13 @@ public class HibernateUtil {
 
    private static SessionFactory buildSessionAnnotationFactory() {
     	try {
-            // Create the SessionFactory from hibernate.cfg.xml
+            // Create the SessionFactory from hibernate-annotation.cfg.xml
         	Configuration configuration = new Configuration();
         	configuration.configure("journaldev/hibernate-annotation.cfg.xml");
-        	logger.info("Hibernate Annotation Configuration loaded");
+        	logger.info("   >>> Hibernate Annotation Configuration loaded");
         	
         	ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
-        	logger.info("Hibernate Annotation serviceRegistry created");
+        	logger.info("   >>> Hibernate Annotation serviceRegistry created");
         	
         	SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
         	

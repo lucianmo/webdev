@@ -1,0 +1,6 @@
+Scenario 1: An Exception Occurs
+
+I|ListOfNumbers                           |Entering try statement
+E|ListOfNumbers                           |Caught IOException: src\main\resource\flat\OutFile.txt (The system cannot find the path specified)
+I|ListOfNumbers                           |PrintWriter not open
+

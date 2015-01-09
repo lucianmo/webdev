@@ -1,0 +1,49 @@
+FileReadingUnchecked
+
+com.work.exception.core2.WrappingUnchecked: In FileNotFoundException
+	at com.work.exception.core2.FileReadingUnchecked.readFile(FileReadingUnchecked.java:41)
+	at com.work.exception.core2.FileReadingUnchecked.main(FileReadingUnchecked.java:60)
+Caused by: java.io.FileNotFoundException: src\main\resource\flat\myTest.txt (The system cannot find the path specified)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at java.io.FileInputStream.<init>(FileInputStream.java:97)
+	at com.work.exception.core2.FileReadingUnchecked.readFile(FileReadingUnchecked.java:28)
+	... 1 more
+I|FileReadingUnchecked                    |       >>> End main methode 
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+FileReadingChecked
+
+com.work.exception.core2.WrappingException: In FileNotFoundException
+	at com.work.exception.core2.FileReadingChecked.readFile(FileReadingChecked.java:41)
+	at com.work.exception.core2.FileReadingChecked.main(FileReadingChecked.java:60)
+Caused by: java.io.FileNotFoundException: src\main\resource\flat\myTest.txt (The system cannot find the path specified)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at java.io.FileInputStream.<init>(FileInputStream.java:97)
+	at com.work.exception.core2.FileReadingChecked.readFile(FileReadingChecked.java:28)
+	... 1 more
+I|FileReadingChecked                      |       >>> End main methode 
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+FileReadingSafe
+
+I|FileReadingSafe                         |Reading File line by line using BufferedReader
+
+I|FileReadingSafe                         |wrap it in a different exception and throw that exception
+I|FileReadingSafe                         |Exception wrapping is a standard feature in Java since JDK 1.4
+I|FileReadingSafe                         |To avoid this your DAO interface methods can throw DaoException
+
+With error
+Exception in thread "main" com.work.exception.core2.WrappingUnchecked: In FileNotFoundException
+	at com.work.exception.core2.FileReadingSafe.readFileBuffered(FileReadingSafe.java:43)
+	at com.work.exception.core2.FileReadingSafe.main(FileReadingSafe.java:71)
+Caused by: java.io.FileNotFoundException: src\main\resource\flat\myTest.txt (The system cannot find the path specified)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at java.io.FileInputStream.<init>(FileInputStream.java:97)
+	at com.work.exception.core2.FileReadingSafe.readFileBuffered(FileReadingSafe.java:31)
+	... 1 more
+	

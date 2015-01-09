@@ -18,8 +18,8 @@ public class EmploeeAnnotationTest {
     */
    public static void main(String[] args) {
       EmployeeAnnotated emp = new EmployeeAnnotated();
-      emp.setName("David");
-      emp.setRole("Developer");
+      emp.setName("Toto");
+      emp.setRole("Pasage");
       emp.setInsertTime(new Date());
       
       //Get Session
@@ -31,7 +31,7 @@ public class EmploeeAnnotationTest {
       session.save(emp);
       //Commit transaction
       session.getTransaction().commit();
-      logger.info("Employee ID="+emp.getId());
+      logger.info("   >>> Employee ID="+emp.getId());
       
       //terminate session factory, otherwise program won't end
       sessionFactory.close();
