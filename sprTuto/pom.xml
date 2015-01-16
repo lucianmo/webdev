@@ -21,6 +21,7 @@
   <jackson.mapper>1.9.13</jackson.mapper>
                 
   <junit.version>4.11</junit.version>
+  <mockito.version>1.9.5</mockito.version>
   <jdk.version>1.7</jdk.version>  
 </properties>
   
@@ -47,6 +48,12 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId>
 			<version>${org.springframework.version}</version>
+		</dependency>
+		<!-- Spring Test -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>4.0.5.RELEASE</version>
 		</dependency>
 		        
 		<!-- Spring ORM support -->
@@ -123,7 +130,12 @@
         <artifactId>junit</artifactId>
         <version>${junit.version}</version>
         <scope>test</scope>
-       </dependency>             
+       </dependency>
+       <dependency>
+        <groupId>org.mockito</groupId>
+    	<artifactId>mockito-all</artifactId>
+    	<version>${mockito.version}</version>
+	   </dependency>
 </dependencies>
 
 <build>

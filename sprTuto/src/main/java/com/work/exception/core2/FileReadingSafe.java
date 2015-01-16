@@ -9,6 +9,8 @@ import java.io.InputStreamReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ch.qos.logback.core.joran.conditional.IfAction;
+
 public class FileReadingSafe {
 
    private static final Logger logger = LoggerFactory.getLogger(FileReadingSafe.class);
@@ -70,6 +72,7 @@ public class FileReadingSafe {
    public static void main(String[] args) {
       readFileBuffered("src/main/resource/flat/","myTest.txt");
       logger.info("       >>> End main methode \n");
+
    }
 
 }

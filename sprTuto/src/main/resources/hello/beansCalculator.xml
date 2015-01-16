@@ -5,12 +5,13 @@
 
 	<!-- When you declare a bean it calls the zero-argument constructor when the object is instantiated.
 	     You use <property…/> tags to specific what setter methods are called after the constructor runs.-->
-	<bean id="helloBean" class="com.proj.beansHello.HelloWorld">
-		<property name="message" value="Lucian" />
+	     	
+	<bean id="calculator" class="com.work.junit.mockito.andSpring.Calculator">
+		<property name="rectangle" ref="rectangle" />
 	</bean>
-	
-	<bean id="helloBean" class="com.proj.beansHello.HelloWorld">
-		<property name="message" value="Lucian" />
-	</bean>
-	
+		
+	<bean id="rectangle" class="com.work.junit.mockito.andSpring.Rectangle">
+		<property name="length" value="10" />
+		<property name="breadth" value="2" />		
+	</bean>	
 </beans>
