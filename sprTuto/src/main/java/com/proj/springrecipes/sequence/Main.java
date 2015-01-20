@@ -8,6 +8,7 @@ public class Main {
    /**
     * @param args
     */
+   @SuppressWarnings("resource")
    public static void main(String[] args) {
       // 
       ApplicationContext context = 
