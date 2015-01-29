@@ -1,0 +1,8 @@
+Batman the ride	109	50	36
+Deja vu	178	65	32
+Superman ultimate flight	115	60	32
+Boomerang	125	50	28
+Condor	112	30	58
+Superman Ride of Steel	208	73	32
+SpongeBob SquarePants 3-D	3	0	56
+Mind Eraser	115	64	16

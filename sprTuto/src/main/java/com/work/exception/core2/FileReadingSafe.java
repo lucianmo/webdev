@@ -70,7 +70,7 @@ public class FileReadingSafe {
     * @param args
     */
    public static void main(String[] args) {
-      readFileBuffered("src/main/resource/flat/","myTest.txt");
+      readFileBuffered("src/main/resources/flat/","myTest.txt");
       logger.info("       >>> End main methode \n");
 
    }
