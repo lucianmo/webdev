@@ -27,5 +27,10 @@ public class OldManner {
       omInteger.setT(new Integer(12));
       Integer rezInt = (Integer) omInteger.getT();
       logger.info(" >>> rezInt: "+rezInt);
+      
+      /*
+      I|OldManner                               | >>> rez: toto
+      I|OldManner                               | >>> rezInt: 12
+      */
    }
 }

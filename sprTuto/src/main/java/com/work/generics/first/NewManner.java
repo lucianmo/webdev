@@ -6,25 +6,30 @@ import org.slf4j.LoggerFactory;
 public class NewManner<T> {
    protected static final Logger logger = LoggerFactory.getLogger(NewManner.class);
    
-   private T t;
+   private T myVariable;
  
-   public T getT() {
-      return t;
+   public T getMyVariable() {
+      return myVariable;
    }
    
-   public void setT(T t) {
-      this.t = t;
+   public void setMyVariable(T t) {
+      this.myVariable = t;
    }
    
    public static void main(String[] args) {
       NewManner<Integer> nm = new NewManner<Integer>();
-      nm.setT(new Integer(7));
-      Integer rez = nm.getT();
+      nm.setMyVariable(new Integer(7));
+      Integer rez = nm.getMyVariable();
       logger.info("rez: "+rez);
       
       NewManner<String> ns = new NewManner<String>();
-      ns.setT("What is that");
-      String rezs = ns.getT();
+      ns.setMyVariable("What is that");
+      String rezs = ns.getMyVariable();
       logger.info("rezs: "+rezs);
+      
+      /*
+      I|NewManner                               |rez: 7
+      I|NewManner                               |rezs: What is that
+      */
    }
 }

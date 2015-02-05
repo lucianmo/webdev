@@ -137,6 +137,7 @@ public class First {
     * 
     * Read line from file and for each read values separated by "\t"(tab)
     */
+   @SuppressWarnings("resource")
    public static void readLineAndContentOf () {
       
       BufferedReader br = null;
@@ -234,29 +235,29 @@ public class First {
     */
    public static void main(String[] args) throws IOException {
       
-      //readByteSteam();
-      //logger.info("Process end for readByteSteam()");
+      readByteSteam();
+      logger.info("Process end for readByteSteam()");
       
-      //readCharStream();
-      //logger.info("Process end for readCharStream()");
+      readCharStream();
+      logger.info("Process end for readCharStream()");
       
-      //copyLineByLine();
-      //logger.info("Process end for copyLineByLine()");
+      copyLineByLine();
+      logger.info("Process end for copyLineByLine()");
       
-      //readLineAndContentOf();
-      //logger.info(" \nProcess end for readLineAndContentOf()");
+      readLineAndContentOf();
+      logger.info(" \nProcess end for readLineAndContentOf()");
       
       //A path does not have to exist when we create a Path object. 
-/*      Path p1 = Paths.get("C:\\Temp\\2\\test1.txt");
+      Path p1 = Paths.get("C:\\Temp\\2\\test1.txt");
       
       URI p1UriPath = p1.toUri();
       logger.info("URI Path: " + p1UriPath);    
       printDetails(p1);
       
       Path p2 = Paths.get("test1.txt");
-      printDetails(p2);*/
+      printDetails(p2);
       
-      //creatingNewFiles();
+      creatingNewFiles();
    }
 
 }
