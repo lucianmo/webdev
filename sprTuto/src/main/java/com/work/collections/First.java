@@ -79,7 +79,7 @@ public class First {
          
           Object anObj = it.next();
           if(thisElement.equals(anObj)) {
-             it.remove();
+             it.remove(); //Iterator.remove is the only safe way to modify a collection during iteration
              logger.info("Element: "+thisElement.toString()+" is equal to "+anObj.toString());
           }          
       }

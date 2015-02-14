@@ -13,13 +13,14 @@ import java.util.TreeSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Implementations {
+public class ImplementationsSet {
 
    
-   private static final Logger logger = LoggerFactory.getLogger(Implementations.class);
+   private static final Logger logger = LoggerFactory.getLogger(ImplementationsSet.class);
    
    public static void findDuplicates() {
       
+   //JAVA SET EXAMPLEA
       String[] aLotOfWord = {"I","came","I","was","I","left"};
       
       // HashSet, which makes no guarantees as to the order of the elements in the Set.
@@ -48,7 +49,9 @@ public class Implementations {
       Arrays.sort(myIntArray);
       logger.info("  >>> 'Array' Apres le sort: "+Arrays.toString(myIntArray));
       
-      // Sort Wrapper classes (String, Date, Integer). All Wrapper have implemented Comparable interface. 
+      /**SORT COLLECTIONS
+       * Sort Wrapper classes (String, Date, Integer). All Wrapper have implemented Comparable interface.        
+      */ 
       String[] myStrArray = new String[] {"M","O","L","D","V"};
       
       List<String> myList = new ArrayList<String>(Arrays.asList(myStrArray));
@@ -62,7 +65,7 @@ public class Implementations {
       Employee e1 = new Employee(30, "Toto", 20, 30000);
       Employee e2 = new Employee(10, "Zoro", 25, 40000);
       Employee e3 = new Employee(70, "Adam", 30, 50000);      
-      Implementations myImpl = new Implementations(); 
+      ImplementationsSet myImpl = new ImplementationsSet(); 
       
       
       //Sort Array

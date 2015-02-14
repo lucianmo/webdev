@@ -3,7 +3,13 @@ package com.work.generics.objects;
 public class ErrorResponse {
 	private ErrorInfo errorInfo;
 
-	public ErrorInfo getErrorInfo() {
+   public ErrorResponse() {}
+   
+	public ErrorResponse(ErrorInfo errorInfo) {
+      this.errorInfo = errorInfo;
+   }
+
+   public ErrorInfo getErrorInfo() {
 		return errorInfo;
 	}
 
