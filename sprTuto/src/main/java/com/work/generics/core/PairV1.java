@@ -2,7 +2,6 @@ package com.work.generics.core;
 
 /**
  * 
- * @author myname
  *
  */
 public class PairV1<T> {
@@ -25,8 +24,12 @@ public class PairV1<T> {
       return this.second;
    }
 
-   public void setSecond(T second) {
-      this.second = second;
+   public void setFirst(T newValue) {
+      this.first = newValue;
+   }
+
+   public void setSecond(T newValue) {
+      this.second = newValue;
    }
       
 }

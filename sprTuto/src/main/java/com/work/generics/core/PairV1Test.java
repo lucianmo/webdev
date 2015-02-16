@@ -1,5 +1,6 @@
 package com.work.generics.core;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -62,11 +63,15 @@ public class PairV1Test {
     * But we run into a problem when processing an array of GregorianCalendar objects. 
     * As it happens, GregorianCalendar is a subclass of Calendar, and Calendar implements Comparable<Calendar>. 
     * Thus, GregorianCalendar implements Comparable<Calendar> but not Comparable<GregorianCalendar>.
-    * In a situation such as this one, supertypes come to the rescue:
+    * In a situation we use: Comparable<? super T>. <? super T> means T or a superclass. 
+    * To summarise, this says first that the type T must implement Comparable. 
+    * Then, the type variable declaration states "T is a type that is comparable to itself or to some superclass of itself."
     * 
     *    public static <T extends Comparable<? super T>> PairV1<T> minmaxOfObjects
     * 
     * Now the compareTo method has the form: int compareTo(? super T)
+    * That means the "?" can be an object of type T, or—for example, 
+    * when T is GregorianCalendar — a supertype of T. 
     * 
     * @param objArray - an array of Object that implement Interface Comparable
     * @return - a pair with the min and max value, or null if a is null or empty
@@ -87,19 +92,28 @@ public class PairV1Test {
    public static void main(String[] args) {
       // TEST METHODE minmax
       String[] myTest = new String[] {"un","deux","trois","quatre","cinq"};
-
+      
       PairV1<String> calcule = minmax (myTest);
       logger.info("  >>> Le 'min' est: "+calcule.getFirst()+" et le 'max' est: "+calcule.getSecond());
+      /*
+I|PairV1Test                              |  >>> Le 'min' est: cinq et le 'max' est: un      
+      */
       
-      // TEST METHODE 
+      // TEST METHODE minmaxOfCalendar
       Calendar[] lotOfCalendar = {
-            new GregorianCalendar(1907, Calendar.DECEMBER, 19), 
-            new GregorianCalendar(1900, Calendar.FEBRUARY, 12),
-            new GregorianCalendar(1907, Calendar.SEPTEMBER, 7), 
-            new GregorianCalendar(1912, Calendar.JUNE, 3)  
+            new GregorianCalendar(1903, Calendar.DECEMBER, 19), 
+            new GregorianCalendar(1990, Calendar.JANUARY, 12),
+            new GregorianCalendar(1905, Calendar.SEPTEMBER, 7), 
+            new GregorianCalendar(1910, Calendar.JUNE, 3)  
       };
       PairV1<Calendar> calculateCalendar = minmaxOfCalendar(lotOfCalendar);
-      logger.info("  >>> min Date: "+ calculateCalendar.getFirst());
+      SimpleDateFormat date_format = new SimpleDateFormat("MMM dd, yyyy");
+      logger.info("  >>> Min Date: "+ date_format.format(calculateCalendar.getFirst().getTime()));
+      logger.info("  >>> Min Date: "+ date_format.format(calculateCalendar.getSecond().getTime()));
+      /*
+I|PairV1Test                              |  >>> Min Date: Dec 19,1903
+I|PairV1Test                              |  >>> Min Date: Jan 12,1990      
+      */
       
       // TEST METHODE minmaxOfObjects
       GregorianCalendar[] objDate = {
@@ -108,8 +122,12 @@ public class PairV1Test {
             new GregorianCalendar(1907, Calendar.SEPTEMBER, 7), 
             new GregorianCalendar(1912, Calendar.JUNE, 3)
       };
-      //PairV1<GregorianCalendar> getDate = minmaxOfObjects(objDate);
-      
-      
+      PairV1<GregorianCalendar> calculateGregorianDate = minmaxOfObjects(objDate);
+      logger.info("  >>> Min Date: "+ date_format.format(calculateGregorianDate.getFirst().getTime()));
+      logger.info("  >>> Min Date: "+ date_format.format(calculateGregorianDate.getSecond().getTime()));      
+      /*
+I|PairV1Test                              |  >>> Min Date: Feb 12, 1900
+I|PairV1Test                              |  >>> Min Date: Jun 03, 1912      
+      */
    }
 }
