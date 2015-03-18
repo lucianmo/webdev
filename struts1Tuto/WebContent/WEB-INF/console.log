@@ -1,0 +1,23 @@
+
+1. helloWorld
+	http://localhost:8080/struts1Tuto/helloWorld.do
+
+2. Processing Requests with Action Objects
+
+	2.1 http://localhost:8080/struts1Tuto/register1.jsp
+		response is http://localhost:8080/struts1Tuto/register1.do
+
+	2.2 http://localhost:8080/struts1Tuto/register2.jsp
+	
+3. Handling Request Parameters with Form Beans
+		http://localhost:8080/struts1Tuto/register3.jsp
+	
+4. Prepopulating and Redisplaying Input Forms
+	4.1 http://localhost:8080/struts1Tuto/inputforms/signup1.jsp	
+
+	4.2 http://localhost:8080/struts1Tuto/inputforms/signup2.jsp
+	
+5. Using Properties Files
+	http://localhost:8080/struts1Tuto/inputforms/register.jsp	
+
+	

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC 
+"-//Apache Software Foundation//DTD Struts Configuration 1.3//EN" 
+"http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd">
+ 
+<struts-config>
+ 	  
+	<form-beans>
+	   <form-bean name="helloWorldForm" type="com.work.first.HelloWorldForm"/>
+	   <form-bean name="userFormBean" type="com.work.formbeans.form.UserFormBean"/>
+	   <form-bean name="contactFormBean" type="com.work.inputforms.form.ContactFormBean"/>
+	   <form-bean name="registrationBean" type="com.work.propertiesfiles.form.RegistrationFormBean"/>
+	</form-beans>
+ 
+ 	<!-- The global-forwards section goes before action-mappings, not within it.
+ 	     Need to be after <form-beans> tag -->
+   	<global-forwards>
+    	<forward name="success" path="/WEB-INF/results/confirm.jsp"/>
+  	</global-forwards>
+  	
+	<action-mappings>
+	   	<action path="/helloWorld" type="com.work.first.HelloWorldAction" name="helloWorldForm">
+			<forward name="success" path="/HelloWorld.jsp"/>
+	   	</action>
+
+		<!-- Using Properties Files -->
+	    <action path="/actions/register" 
+	            type="com.work.propertiesfiles.action.RegistrationAction"
+	            name="registrationBean"
+	            scope="request">
+	      <forward name="success" path="/WEB-INF/results/confirm-registration.jsp"/>
+	    </action>
+    
+    	<!-- Processing Requests with Action Objects -->
+	    <action path="/register1" type="com.work.actionobjects.RegisterAction1">
+	    </action>
+	    	   
+	    <action path="/register2" type="com.work.actionobjects.RegisterAction2">
+	      	<forward name="bad-address" path="/WEB-INF/results/badAddress.jsp"/>
+	      	<forward name="bad-password" path="/WEB-INF/results/badPassword.jsp"/>	    
+	    </action>
+
+	    <action path="/register3" 
+	            type="com.work.formbeans.action.BeanRegisterAction"
+	            name="userFormBean"
+	            scope="request">
+	      <forward name="bad-address" path="/WEB-INF/results/bad-address3-EL.jsp"/>
+	      <forward name="bad-password" path="/WEB-INF/results/bad-password3.jsp"/>
+	      <forward name="success" path="/WEB-INF/results/confirm-registration3.jsp"/>
+	    </action>
+	    
+	    <!-- Prepopulating and Redisplaying Input Forms -->
+	    <action path="/actions/signup1" 
+            	type="com.work.inputforms.action.SignupAction1"
+            	name="contactFormBean"
+            	scope="request">
+            <forward name="success" path="/WEB-INF/results/order-confirmation.jsp"/>
+      		<forward name="missing-value" path="/WEB-INF/results/missing-value.jsp"/>
+    	</action>
+    	
+    	<action path="/actions/signup2" 
+            	type="com.work.inputforms.action.SignupAction2"
+            	name="contactFormBean"
+            	scope="request">
+            <forward name="success" path="/WEB-INF/results/order-confirmation.jsp"/>
+      		<forward name="missing-value" path="/inputforms/signup2.jsp"/>
+    	</action>
+	</action-mappings>
+ 	
+ 	<!-- The parameter attribute refers to the location of the properties file relative to WEB-INF/classes.
+ 		 Ex: "messages.MessageResources" refers to WEB-INF/classes/messages/MessageResources.properties
+ 		 The "null" attribute determines whether missing messages should be flagged. 
+ 		 If the value is true, references to nonexistent messages result in null. If the
+		 value is false, references to nonexistent messages result in warning messages like ???keyName???.
+ 	-->
+    <message-resources parameter="messages.MessageResources" null="false"/>
+                     
+</struts-config>
