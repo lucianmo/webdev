@@ -1,0 +1,50 @@
+<definitions name="HelloWorld" targetNamespace="http://java-soa.blogspot.com/"
+xmlns:tns="http://java-soa.blogspot.com/" xmlns="http://schemas.xmlsoap.org/wsdl/"
+xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <!-- types -->
+  <types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema"
+elementFormDefault="qualified" targetNamespace="http://java-soa.blogspot.com/">
+      <element name="name" type="xsd:string" />
+      <element name="response" type="xsd:string" />
+    </xsd:schema>
+  </types>
+  
+  <!-- messages -->
+  <message name="name">
+    <part name="in" element="tns:name" />
+  </message>
+  <message name="response">
+    <part name="out" element="tns:response" />
+  </message>
+  
+  <!-- operations -->
+  <portType name="HelloWorldPortType">
+    <operation name="hello">
+      <input message="tns:name" />
+      <output message="tns:response" />
+    </operation>
+  </portType>
+  
+  <!-- binding -->
+  <binding name="HelloWorldBinding" type="tns:HelloWorldPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+    <operation name="hello">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  
+  <!-- services -->
+  <service name="HelloWorldService">
+    <port name="HelloWorldPort" binding="tns:HelloWorldBinding">
+      <soap:address location="REPLACE_WITH_ACTUAL_URL" />
+    </port>
+  </service>
+</definitions>

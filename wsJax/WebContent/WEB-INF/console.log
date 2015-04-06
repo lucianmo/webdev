@@ -1,0 +1,51 @@
+# tested from 
+http://java-soa.blogspot.ca/2008/07/simple-jax-ws-web-service-with-eclipse.html
+http://techdiary.bitourea.com/2008/12/tutorial-to-use-eclipse-with-jax-ws-for.html
+
+# to deploy on tomcat:
+Download the JAX-WS Reference Implementation (RI), from https://jax-ws.java.net/ and add following .jar to TOMCAT_HOME/lib.
+I was using jaxws-ri-2.2.8 and apache-tomcat-6.0.35.
+
+jaxws-rt.jar   		-> java.lang.NoClassDefFoundError: com.sun.xml.ws.transport.http.servlet.WSServletContextListener
+jaxb-core.jar 		-> java.lang.NoClassDefFoundError: com/sun/istack/localization/Localizable
+streambuffer.jar 	-> java.lang.ClassNotFoundException: com.sun.xml.stream.buffer.XMLStreamBuffer
+jaxb-impl.jar 		-> java.lang.ClassNotFoundException: com.sun.xml.bind.api.JAXBRIContext
+policy.jar 			-> java.lang.ClassNotFoundException: com.sun.xml.ws.policy.PolicyException
+stax-ex.jar 		-> java.lang.ClassNotFoundException: org.jvnet.staxex.XMLStreamReaderEx
+gmbal-api-only.jar 	-> java.lang.ClassNotFoundException: org.glassfish.gmbal.ManagedObjectManager
+management-api.jar 	-> java.lang.ClassNotFoundException: org.glassfish.external.amx.AMXGlassfish
+ha-api.jar 			-> java.lang.ClassNotFoundException: org.glassfish.ha.store.api.BackingStoreException
+
+Then deploy war file to Tomcat server.
+
+# to check the web service:
+http://localhost:8080/wsJax/helloWorld?wsdl
+============================= Tomcat Trace ========================================================================
+INFO: Deploying web application archive wsJax.war
+ com.sun.xml.ws.transport.http.servlet.WSServletContextListener contextInitialized
+INFO: WSSERVLET12: JAX-WS context listener initializing
+ com.sun.xml.ws.transport.http.servlet.WSServletDelegate <init>
+INFO: WSSERVLET14: JAX-WS servlet initializing
+============================= Tomcat Trace ========================================================================
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Configuring WsImport
+
+the command wsimport generates the different java classes from the wsdl.
+
+    Select the menu Run → External Tools → External Tools Configuration
+    Click on Program then on button
+    Specify the following informations :
+        Name : GenerateJavaFromWSDL with JAXWS
+        Location : <JAXWS_ROOT>/bin/wsimport.[bat|sh]
+        Working Directory : ${project_loc}
+        Arguments : -keep -d ${project_loc}/src -p com.javasoa.ws ${resource_loc} -Xendorsed
+    Click on Close button
+
+    Arguments description :
+
+        keep : without this argument, sources files are deleted after generation
+        d : source path
+        p : source files target package
+
+
