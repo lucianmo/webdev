@@ -1,51 +1,96 @@
-# tested from 
-http://java-soa.blogspot.ca/2008/07/simple-jax-ws-web-service-with-eclipse.html
-http://techdiary.bitourea.com/2008/12/tutorial-to-use-eclipse-with-jax-ws-for.html
+0. Examples from 
+	http://java-soa.blogspot.ca/2008/07/simple-jax-ws-web-service-with-eclipse.html
+	http://techdiary.bitourea.com/2008/12/tutorial-to-use-eclipse-with-jax-ws-for.html
 
-# to deploy on tomcat:
-Download the JAX-WS Reference Implementation (RI), from https://jax-ws.java.net/ and add following .jar to TOMCAT_HOME/lib.
-I was using jaxws-ri-2.2.8 and apache-tomcat-6.0.35.
+1. To deploy on tomcat:
+	Download the JAX-WS Reference Implementation (RI), from https://jax-ws.java.net/ and add following .jar to TOMCAT_HOME/lib.
+	I was using jaxws-ri-2.2.8 and apache-tomcat-6.0.35.
+	
+	jaxws-rt.jar   		-> java.lang.NoClassDefFoundError: com.sun.xml.ws.transport.http.servlet.WSServletContextListener
+	jaxb-core.jar 		-> java.lang.NoClassDefFoundError: com/sun/istack/localization/Localizable
+	streambuffer.jar 	-> java.lang.ClassNotFoundException: com.sun.xml.stream.buffer.XMLStreamBuffer
+	jaxb-impl.jar 		-> java.lang.ClassNotFoundException: com.sun.xml.bind.api.JAXBRIContext
+	policy.jar 			-> java.lang.ClassNotFoundException: com.sun.xml.ws.policy.PolicyException
+	stax-ex.jar 		-> java.lang.ClassNotFoundException: org.jvnet.staxex.XMLStreamReaderEx
+	gmbal-api-only.jar 	-> java.lang.ClassNotFoundException: org.glassfish.gmbal.ManagedObjectManager
+	management-api.jar 	-> java.lang.ClassNotFoundException: org.glassfish.external.amx.AMXGlassfish
+	ha-api.jar 			-> java.lang.ClassNotFoundException: org.glassfish.ha.store.api.BackingStoreException
+	
+	Then deploy war file to Tomcat server.
+	
+	# to check the web service:
+	http://localhost:8080/wsJax/helloWorld?wsdl
+	============================= Tomcat Trace ========================================================================
+	INFO: Deploying web application archive wsJax.war
+	 com.sun.xml.ws.transport.http.servlet.WSServletContextListener contextInitialized
+	INFO: WSSERVLET12: JAX-WS context listener initializing
+	 com.sun.xml.ws.transport.http.servlet.WSServletDelegate <init>
+	INFO: WSSERVLET14: JAX-WS servlet initializing
+	============================= Tomcat Trace ========================================================================
 
-jaxws-rt.jar   		-> java.lang.NoClassDefFoundError: com.sun.xml.ws.transport.http.servlet.WSServletContextListener
-jaxb-core.jar 		-> java.lang.NoClassDefFoundError: com/sun/istack/localization/Localizable
-streambuffer.jar 	-> java.lang.ClassNotFoundException: com.sun.xml.stream.buffer.XMLStreamBuffer
-jaxb-impl.jar 		-> java.lang.ClassNotFoundException: com.sun.xml.bind.api.JAXBRIContext
-policy.jar 			-> java.lang.ClassNotFoundException: com.sun.xml.ws.policy.PolicyException
-stax-ex.jar 		-> java.lang.ClassNotFoundException: org.jvnet.staxex.XMLStreamReaderEx
-gmbal-api-only.jar 	-> java.lang.ClassNotFoundException: org.glassfish.gmbal.ManagedObjectManager
-management-api.jar 	-> java.lang.ClassNotFoundException: org.glassfish.external.amx.AMXGlassfish
-ha-api.jar 			-> java.lang.ClassNotFoundException: org.glassfish.ha.store.api.BackingStoreException
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	
+2. Use of "wsimport" on JDK6. Doc at https://jax-ws.java.net/2.1.7/docs/wsimport.html., https://jax-ws.java.net/2.2.6/docs/ch04.html#running-on-jdk6
 
-Then deploy war file to Tomcat server.
+		Copy JAXWS_HOME/lib/jaxws-api.jar to JDK6_HOME/jre/lib/endorsed directory 
+		Copy JAXWS_HOME/lib/jaxb-api.jar to JDK6_HOME/jre/lib/endorsed directory
+		
+		Above, JAXWS_HOME points to the root directory of the extracted JAX-WS RI bundle. JDK6_HOME points to JDK 6 installation directory. 
+	
+		The wsimport tool generates JAX-WS portable artifacts, such as: 
+			- Service Endpoint Interface (SEI)
+			- Service
+			- Exception class mapped from wsdl:fault (if any) 
+			- Async Reponse Bean derived from response wsdl:message (if any) 
+			- JAXB generated value types (mapped java classes from schema types) 
+	
+	Starting from a WSDL file: 
+	
+		1. Use "wsimport" to generate portable artifacts.
+		2. Implement the service endpoint.
+		3. Package the WSDL file, 
+					   schema documents, 
+					   web.xml, 
+					   sun-jaxws.xml, 
+					   service endpoint interface and implementation class, 
+					   value types, 
+					   and generated classes, if any, into a WAR file.
+		4. Deploy the WAR to a web container
+		
+	Example:
+		- placer le fichier "HelloWorld.wsdl" dans le répertoire "C:\DevLM\exportHere\"
+		- executer:
+			> wsimport -help 
+			> wsimport C:\DevLM\exportHere\HelloWorld.wsdl -s C:\DevLM\exportHere -p forTest -Xnocompile
+		
+		- Arguments description :
+			-p <pkg>				Specifying a target packag
+			-keep					Keep generated source code files. It is enabled when -s option.
+			-s <directory>			Specify where to place generated source code files. keep is turned on with this option.
+			-Xnocompile				Do not compile generated Java files.
 
-# to check the web service:
-http://localhost:8080/wsJax/helloWorld?wsdl
-============================= Tomcat Trace ========================================================================
-INFO: Deploying web application archive wsJax.war
- com.sun.xml.ws.transport.http.servlet.WSServletContextListener contextInitialized
-INFO: WSSERVLET12: JAX-WS context listener initializing
- com.sun.xml.ws.transport.http.servlet.WSServletDelegate <init>
-INFO: WSSERVLET14: JAX-WS servlet initializing
-============================= Tomcat Trace ========================================================================
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	
+3. Configuring "WsImport" On Eclipse
+	
+	the command "wsimport" generates the different java classes from the wsdl.
+	
+	    Select the menu Run → External Tools → External Tools Configuration
+	    Click on Program then on button
+	    Specify the following informations :
+	        Name : GenerateJavaFromWSDL with JAXWS
+	        Location : <JAXWS_ROOT>/bin/wsimport.[bat|sh]
+	        Working Directory : ${project_loc}
+	        Arguments : -keep -d ${project_loc}/src -p com.javasoa.ws ${resource_loc} -Xendorsed
+	    Click on Close button
+	
+	    Arguments description :
+	
+	        keep : without this argument, sources files are deleted after generation
+	        d : source path - Specify where to place generated output files 
+	        p : source files target package
 
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-Configuring WsImport
-
-the command wsimport generates the different java classes from the wsdl.
-
-    Select the menu Run → External Tools → External Tools Configuration
-    Click on Program then on button
-    Specify the following informations :
-        Name : GenerateJavaFromWSDL with JAXWS
-        Location : <JAXWS_ROOT>/bin/wsimport.[bat|sh]
-        Working Directory : ${project_loc}
-        Arguments : -keep -d ${project_loc}/src -p com.javasoa.ws ${resource_loc} -Xendorsed
-    Click on Close button
-
-    Arguments description :
-
-        keep : without this argument, sources files are deleted after generation
-        d : source path
-        p : source files target package
-
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+4. Exemple 
+	http://java.dzone.com/articles/creating-and-deploying-jax-ws
 
