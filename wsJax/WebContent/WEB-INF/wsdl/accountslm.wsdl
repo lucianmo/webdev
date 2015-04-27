@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="AccountDetails" 
+			 targetNamespace="http://gognamunish.com/accounts"
+	         xmlns:tns="http://gognamunish.com/accounts" 
+	         xmlns:obj="http://gognamunish.com/accounts"
+	         xmlns="http://schemas.xmlsoap.org/wsdl/"
+	         xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	         xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+
+	<types>
+		<xsd:schema xmlns="http://www.w3.org/2001/XMLSchema"
+			elementFormDefault="qualified" targetNamespace="http://gognamunish.com/accounts">
+
+			<element name="geAccountDetails_INTO" type="tns:GeAccountDetails_INTO" />
+			<element name="accountDetails_TO" type="tns:AccountDetails_TO" />
+			<element name="accountDetailsFault" type="tns:AccountDetailsFault" />
+			<element name="securityToken" type="tns:SecurityToken" />
+			
+			<complexType name="GeAccountDetails_INTO">
+				<sequence>
+					<element name="accountNo" type="xsd:string" />
+				</sequence>
+			</complexType>
+
+			<complexType name="AccountDetails_TO">
+				<sequence>
+					<element name="accNo" type="xsd:string" />
+					<element name="accType" type="xsd:string" />
+					<element name="balance" type="xsd:decimal" />
+					<element name="state" type="obj:AccountActivType" />
+				</sequence>
+			</complexType>
+
+			<simpleType name="AccountActivType">
+				<restriction base="xsd:string">
+					<enumeration value="OPEN" />
+					<enumeration value="CLOSE" />
+				</restriction>
+			</simpleType>  
+			
+			<complexType name="SecurityToken">
+				<sequence>
+					<element name="token" type="xsd:string" />
+					<element name="validTill" type="xsd:date" />
+				</sequence>
+			</complexType>
+			
+			<complexType name="AccountDetailsFault">
+				<sequence>
+					<element name="faultInfo" type="xsd:string" />
+					<element name="message" type="xsd:string" />
+				</sequence>
+			</complexType>
+			
+		</xsd:schema>
+	</types>
+	
+	<!--  messages format -->
+	<message name="accountDetailsRequest">
+		<part name="parameters" element="tns:geAccountDetails_INTO" />
+		<part name="request_header" element="tns:securityToken"/>
+	</message>
+	<message name="accountDetailsResponse">
+		<part name="parameters" element="tns:accountDetails_TO" />
+	</message>
+	<message name="accountDetailsFault">
+		<part name="faultInfo" element="tns:accountDetailsFault" />
+	</message>
+
+	<!-- define getAccountDetails operation here -->	
+	<portType name="AccountDetailsPortType">
+		<operation name="getAccountDetails">
+			<input message="tns:accountDetailsRequest" />
+			<output message="tns:accountDetailsResponse" />
+			<fault message="tns:accountDetailsFault" name="accountDetailsFault"/>
+		</operation>
+	</portType>
+	
+	<!-- bind the operations -->
+	<binding name="AccountDetailsBinding" type="tns:AccountDetailsPortType">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+		<operation name="getAccountDetails">
+			<soap:operation soapAction="getAccountDetails" />
+			<input>
+				<soap:body use="literal" parts="parameters"/>
+				<soap:header use="literal" part="request_header" message="tns:accountDetailsRequest"></soap:header>
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+			<fault name="accountDetailsFault">
+				<soap:fault name="accountDetailsFault" use="literal" />
+			</fault>
+		</operation>
+	</binding>
+	
+	<!-- name and location of the service -->
+	<service name="AccountDetailsService">
+		<port name="AccountDetailsPort" binding="tns:AccountDetailsBinding">
+			<soap:address location="http://localhost:8080/account/details" />
+		</port>
+	</service>
+</definitions>
